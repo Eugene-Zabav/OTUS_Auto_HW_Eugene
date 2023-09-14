@@ -12,6 +12,10 @@ from src.triangle import Triangle
         (1, 1, 4),
         (0.01, 0.0001, 0.04),
     ],
+    ids=[
+        "integers",
+        "fractional"
+    ]
 )
 def test_square_create_positive(side, area, perimeter):
     square = Square(side)
@@ -28,7 +32,15 @@ def test_square_create_positive(side, area, perimeter):
         -0.001,
         "1",
         True,
+        None,
     ],
+    ids=[
+        "zero",
+        "negative",
+        "string",
+        "bool",
+        "None",
+    ]
 )
 def test_square_create_negative(side):
     with pytest.raises(ValueError):
@@ -58,6 +70,13 @@ def test_square_add_area():
         True,
         None,
     ],
+    ids=[
+        "int",
+        "float",
+        "string",
+        "bool",
+        "None"
+    ]
 )
 def test_square_add_area_negative(some_object):
     square = Square(7)

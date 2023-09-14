@@ -5,12 +5,10 @@ class Figure(ABC):
     def __init__(self, name):
         self.name = name
 
-    @property
     @abstractmethod
     def area(self):
         raise NotImplementedError
 
-    @property
     @abstractmethod
     def perimeter(self):
         raise NotImplementedError

@@ -12,6 +12,10 @@ from src.triangle import Triangle
         (1, 3.14159, 6.28319),
         (0.01, 0.00031, 0.06283),
     ],
+    ids=[
+        "integers",
+        "fractional"
+    ]
 )
 def test_circle_create_positive(radius, area, perimeter):
     circle = Circle(radius)
@@ -30,6 +34,13 @@ def test_circle_create_positive(radius, area, perimeter):
         True,
         None,
     ],
+    ids=[
+        "zero",
+        "negative",
+        "string",
+        "bool",
+        "None",
+    ]
 )
 def test_circle_create_negative(radius):
     with pytest.raises(ValueError):
@@ -59,6 +70,13 @@ def test_circle_add_area():
         True,
         None,
     ],
+    ids=[
+        "int",
+        "float",
+        "string",
+        "bool",
+        "None"
+    ]
 )
 def test_circle_add_area_negative(some_object):
     circle = Circle(7)

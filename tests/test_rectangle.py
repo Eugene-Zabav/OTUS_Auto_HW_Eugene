@@ -12,6 +12,10 @@ from src.triangle import Triangle
         (1, 2, 2, 6),
         (0.01, 0.01, 0.0001, 0.04),
     ],
+    ids=[
+        "integers",
+        "fractional"
+    ]
 )
 def test_rectangle_create_positive(length, width, area, perimeter):
     rectangle = Rectangle(length, width)
@@ -28,11 +32,25 @@ def test_rectangle_create_positive(length, width, area, perimeter):
         (-0.001, 2),
         ("1", 2),
         (True, 2),
+        (None, 2),
         (2, 0),
         (2, -0.001),
         (2, "1"),
         (2, True),
+        (2, None),
     ],
+    ids=[
+        "length-zero",
+        "length-negative",
+        "length-string",
+        "length-bool",
+        "length-None",
+        "width-zero",
+        "width-negative",
+        "width-string",
+        "width-bool",
+        "width-None",
+    ]
 )
 def test_rectangle_create_negative(length, width):
     with pytest.raises(ValueError):
@@ -62,6 +80,13 @@ def test_rectangle_add_area():
         True,
         None,
     ],
+    ids=[
+        "int",
+        "float",
+        "string",
+        "bool",
+        "None"
+    ]
 )
 def test_rectangle_add_area_negative(some_object):
     rectangle = Rectangle(2, 5)

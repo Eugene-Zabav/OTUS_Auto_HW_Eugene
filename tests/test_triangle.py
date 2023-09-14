@@ -12,6 +12,10 @@ from src.triangle import Triangle
         (3, 4, 5, 6, 12),
         (0.9, 0.9, 0.9, 0.35074, 2.7),
     ],
+    ids=[
+        "integers",
+        "fractional"
+    ]
 )
 def test_rectangle_create_positive(side_a, side_b, side_c, area, perimeter):
     triangle = Triangle(side_a, side_b, side_c)
@@ -28,21 +32,47 @@ def test_rectangle_create_positive(side_a, side_b, side_c, area, perimeter):
         (-0.001, 2, 3),
         ("1", 2, 3),
         (True, 2, 3),
+        (None, 2, 3),
         (2, 0, 3),
         (2, -0.001, 3),
         (2, "1", 3),
         (2, True, 3),
+        (2, None, 3),
         (2, 3, 0),
         (2, 3, -0.001),
         (2, 3, "1"),
         (2, 3, True),
-        (1, 1, 2),
-        (1, 2, 1),
+        (2, 3, None),
         (2, 1, 1),
-        (1, 1, 3),
-        (1, 3, 1),
         (3, 1, 1),
+        (1, 2, 1),
+        (1, 3, 1),
+        (1, 1, 2),
+        (1, 1, 3),
     ],
+    ids=[
+        "side_a_zero",
+        "side_a_negative",
+        "side_a_string",
+        "side_a_bool",
+        "side_a_None",
+        "side_b_zero",
+        "side_b_negative",
+        "side_b_string",
+        "side_b_bool",
+        "side_b_None",
+        "side_c_zero",
+        "side_c_negative",
+        "side_c_string",
+        "side_c_bool",
+        "side_c_None",
+        "a = b + c",
+        "a > b + c",
+        "b = a + c",
+        "b > a + c",
+        "c = a + b",
+        "c > a + b",
+    ]
 )
 def test_triangle_create_negative(side_a, side_b, side_c):
     with pytest.raises(ValueError):
@@ -72,6 +102,13 @@ def test_triangle_add_area():
         True,
         None,
     ],
+    ids=[
+        "int",
+        "float",
+        "string",
+        "bool",
+        "None"
+    ]
 )
 def test_triangle_add_area_negative(some_object):
     triangle = Triangle(2, 5, 4)
