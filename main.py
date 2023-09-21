@@ -8,7 +8,9 @@ def get_books_from_csv(file_name: str) -> list:
 
     with open(file_name, "r") as csv_file:
         for row in csv.DictReader(csv_file):
-            data = {key: value if key != "Pages" else int(value) for key, value in row.items() if key in books_keys}
+            data = {key: value for key, value in row.items() if key in books_keys}
+            if "Pages" in data:
+                data["Pages"] = int(data["Pages"])
             data = {key.lower(): data.pop(key) for key in books_keys}
             books_list.append(data)
 
