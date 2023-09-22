@@ -1,0 +1,14 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Environments
+venv/
+
+# IDE
+.idea/
+
+# Tests
+.pytest_cache
+
+# System
+.DS_Store
