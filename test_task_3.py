@@ -5,20 +5,12 @@ import requests
 @pytest.mark.parametrize(
     ("endpoint", "items_count"),
     [
-        ("posts", 100),
-        ("comments", 500),
-        ("albums", 100),
-        ("photos", 5000),
-        ("todos", 200),
-        ("users", 10),
-    ],
-    ids=[
-        "posts",
-        "comments",
-        "albums",
-        "photos",
-        "todos",
-        "users",
+        pytest.param("posts", 100, id="posts"),
+        pytest.param("comments", 500, id="comments"),
+        pytest.param("albums", 100, id="albums"),
+        pytest.param("photos", 5000, id="photos"),
+        pytest.param("todos", 200, id="todos"),
+        pytest.param("users", 10, id="users"),
     ],
 )
 def test_get_max_items_for_endpoints(endpoint, items_count):
@@ -30,12 +22,8 @@ def test_get_max_items_for_endpoints(endpoint, items_count):
 @pytest.mark.parametrize(
     "post_id",
     [
-        1,
-        2,
-    ],
-    ids=[
-        "id #1",
-        "id #2",
+        pytest.param(1, id="id #1"),
+        pytest.param(2, id="id #2"),
     ],
 )
 def test_post_by_id(post_id):
@@ -57,19 +45,16 @@ def test_breweries_metadata():
 def test_response_body_of_get_comments_by_post_and_search_comments_by_post_are_equal():
     get_comments_by_post = requests.get("https://jsonplaceholder.typicode.com/posts/1/comments")
     search_comments_by_post = requests.get("https://jsonplaceholder.typicode.com/comments?postId=1")
-    assert get_comments_by_post.status_code == search_comments_by_post.status_code == 200
+    assert get_comments_by_post.status_code == 200
+    assert search_comments_by_post.status_code == 200
     assert get_comments_by_post.text == search_comments_by_post.text
 
 
 @pytest.mark.parametrize(
     "post_id",
     [
-        1,
-        2,
-    ],
-    ids=[
-        "id #1",
-        "id #2",
+        pytest.param(1, id="id #1"),
+        pytest.param(2, id="id #2"),
     ],
 )
 def test_get_comments_by_post_id(post_id):

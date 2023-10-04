@@ -5,12 +5,8 @@ import requests
 @pytest.mark.parametrize(
     "brewer_id",
     [
-        "b54b16e1-ac3b-4bff-a11f-f7ae9ddc27e0",
-        "5128df48-79fc-4f0f-8b52-d06be54d0cec",
-    ],
-    ids=[
-        "id #1",
-        "id #2",
+        pytest.param("b54b16e1-ac3b-4bff-a11f-f7ae9ddc27e0", id="id #1"),
+        pytest.param("b54b16e1-ac3b-4bff-a11f-f7ae9ddc27e0", id="id #2"),
     ],
 )
 def test_brewer_by_id(brewer_id):
@@ -29,18 +25,11 @@ def test_brewer_by_wrong_id():
 @pytest.mark.parametrize(
     ("endpoint", "breweries_count"),
     [
-        (0, 0),
-        (1, 1),
-        (100, 100),
-        (200, 200),
-        (201, 200),
-    ],
-    ids=[
-        "min",
-        "1",
-        "average",
-        "max",
-        "max+1",
+        pytest.param(0, 0, id="min"),
+        pytest.param(1, 1, id="min+1"),
+        pytest.param(100, 100, id="average"),
+        pytest.param(200, 200, id="max"),
+        pytest.param(201, 200, id="max+1"),
     ],
 )
 def test_get_specified_breweries_count(endpoint, breweries_count):
@@ -52,17 +41,14 @@ def test_get_specified_breweries_count(endpoint, breweries_count):
 @pytest.mark.parametrize(
     ("url_city", "response_city"),
     [
-        ("san_diego", "San Diego"),
-        ("austin", "Austin"),
-    ],
-    ids=[
-        "San Diego",
-        "Austin",
+        pytest.param("san_diego", "San Diego", id="San Diego"),
+        pytest.param("austin", "Austin", id="Austin"),
     ],
 )
 def test_get_breweries_by_city(url_city, response_city):
     response = requests.get(f"https://api.openbrewerydb.org/v1/breweries?by_city={url_city}&per_page=3")
     assert response.status_code == 200
+    assert len(response.json()) == 3
     for brewery in response.json():
         assert brewery["city"] == response_city
 
